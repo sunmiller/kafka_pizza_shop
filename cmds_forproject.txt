@@ -1,0 +1,9 @@
+go get go.mongodb.org/mongo-driver
+
+go get github.com/segmentio/kafka-go
+
+go get github.com/joho/godotenv
+
+go get github.com/gin-gonic/gin
+
+docker compose up -d
