@@ -11,8 +11,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sunmiller/pizza-shop-eda/order-service/config"
 	"github.com/sunmiller/pizza-shop-eda/order-service/constants"
+	messageconsumer1 "github.com/sunmiller/pizza-shop-eda/order-service/message_consumer"
 
-	// "github.com/sunmiller/pizza-shop-eda/order-service/repository"
+	"github.com/sunmiller/pizza-shop-eda/order-service/repository"
+
 	"github.com/sunmiller/pizza-shop-eda/order-service/routes"
 	"github.com/sunmiller/pizza-shop-eda/order-service/service"
 )
@@ -22,8 +24,8 @@ var webPort = 8001
 func main() {
 	log.Println("🟢 Docker Go app started, waiting...")
 	log.Println("This is standard error (via log)")
-	log.Println("Kafka host:", config.GetEnvProperty("kafka_host"))
-	log.Println("Kafka port:", config.GetEnvProperty("kafka_port"))
+	log.Println("Kafka host:", config.GetEnvProperty("KafkaHost"))
+	log.Println("Kafka port:", config.GetEnvProperty("KafkaPort"))
 	log.Println(os.Getenv("LOG"))
 	gin.SetMode(gin.ReleaseMode)
 	app := gin.Default()
@@ -35,12 +37,12 @@ func main() {
 		})
 	})
 	log.Println("This is start of repositories initialize")
-	// var repositories = repository.GetRepositories()
+	var repositories = repository.GetRepositories()
 
-	// consumer := service.GetNewKafkaConsumer(constants.TOPIC_ORDER, "order-message")
-	// var orderMessageConsumer = messageconsumer1.GetOrderMessageConsumer(consumer, *repositories)
+	consumer := service.GetNewKafkaConsumer(constants.TOPIC_ORDER, "order-message")
+	var orderMessageConsumer = messageconsumer1.GetOrderMessageConsumer(consumer, *repositories)
 
-	// go orderMessageConsumer.StartConsuming()
+	go orderMessageConsumer.StartConsuming()
 
 	log.Println("This is completion of orderMessageConsumer")
 

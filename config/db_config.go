@@ -32,9 +32,9 @@ func InitializeDB() {
 }
 
 func initDatabase() (*mongo.Client, error) {
-	dbURL := GetEnvProperty("database_url")
+	dbURL := GetEnvProperty("DatabaseURL")
 	if dbURL == "" {
-		return nil, fmt.Errorf("database_url is not set int the env variable")
+		return nil, fmt.Errorf("DatabaseURL is not set int the env variable")
 	}
 
 	clientOptions := options.Client().ApplyURI(dbURL).

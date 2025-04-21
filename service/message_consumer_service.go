@@ -69,7 +69,7 @@ func GetNewKafkaConsumer(topic, groupId string) *KafkaMessageConsumer {
 	reader := kafka.NewReader(
 		kafka.ReaderConfig{
 			Brokers: []string{
-				fmt.Sprintf("%s:%s", config.GetEnvProperty("kafka_host"), config.GetEnvProperty("kafka_port")),
+				fmt.Sprintf("%s:%s", config.GetEnvProperty("KafkaHost"), config.GetEnvProperty("KafkaPort")),
 			},
 			Topic:   topic,
 			GroupID: groupId,

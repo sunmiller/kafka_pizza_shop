@@ -21,8 +21,8 @@ type KafkaConnection struct {
 }
 
 func GetNewKafkaConnection(topic, groupId string) *KafkaConnection {
-	host := GetEnvProperty("kafka_host")
-	port := GetEnvProperty("kafka_port")
+	host := GetEnvProperty("KafkaHost")
+	port := GetEnvProperty("KafkaPort")
 
 	if port == "" {
 		port = "9092"
@@ -59,8 +59,8 @@ func GetNewKafkaConnection(topic, groupId string) *KafkaConnection {
 }
 
 func (k *KafkaConnection) Connect() (*kafka.Conn, error) {
-	host := GetEnvProperty("kafka_host")
-	port := GetEnvProperty("kafka_port")
+	host := GetEnvProperty("KAFKA_HOST")
+	port := GetEnvProperty("KAFKA_PORT")
 
 	if port == "" {
 		port = "9092"
